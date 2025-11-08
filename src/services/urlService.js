@@ -34,3 +34,16 @@ exports.redirectToOriginal = async (req, res, next) => {
     next(err);
   }
 };
+
+// List all URLs (for frontend “Recent” section)
+exports.listUrls = async (req, res, next) => {
+  try {
+    const [rows] = await pool.query(
+      'SELECT short_id, original_url, clicks, created_at FROM urls ORDER BY created_at DESC LIMIT 10'
+    );
+    res.json(rows);
+  } catch (err) {
+    logger.logError(err);
+    next(err);
+  }
+};

@@ -8,4 +8,7 @@ router.post('/shorten', urlService.createShortUrl);
 // Redirect by short ID
 router.get('/:shortId', urlService.redirectToOriginal);
 
+// this new route for “Recent”
+router.post('/list', urlService.listUrls);
+
 module.exports = router;
